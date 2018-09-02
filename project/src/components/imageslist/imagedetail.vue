@@ -1,10 +1,10 @@
 <template>
     <div class="tmpl">
         <!--  组件名navBar -->  
-        <nav-bar title="详情页面"></nav-bar>
+        <nav-bar title="图片详情"></nav-bar>
         <!-- 组件名:navbar -->
         <!--  使用：navbar-->
-        <!-- <div class="photo-title">
+        <div class="photo-title">
             <p v-text="imgInfo.title"></p>
             <span>发起日期：{{imgInfo.add_time | convertDate}}</span>
             <span>{{imgInfo.click}}次浏览</span>
@@ -12,22 +12,21 @@
         </div>
         <ul class="mui-table-view mui-grid-view mui-grid-9">
             <li v-for="(img,index) in imgs"  :key="index"  class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-               
+                <!-- <img :src="img.src"> -->
                  <img class="preview-img" :src="img.src" height="100" @click="$preview.open(index, imgs)">
             </li>
            
         </ul>
         <div class="photo-desc">
             <p v-html="imgInfo.content"></p>
-        </div> -->
+        </div>
         
         <!-- 使用评论子组件 -->
-        <!-- <comment :cid="pid"></comment> -->
+        <comment :cid="pid"></comment>
     </div>
 </template>
 <script>
 export default {
-
 }
 </script>
 <style scoped>
@@ -78,5 +77,7 @@ ul {
 .mui-table-view-cell.mui-media.mui-col-xs-4.mui-col-sm-3 {
     padding: 2 2;
 }
+
+
 
 </style>
