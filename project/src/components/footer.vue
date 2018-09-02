@@ -1,5 +1,5 @@
 <template>
-    	<nav class="mui-bar mui-bar-tab">
+    	<nav class="mui-bar mui-bar-tab ">
 			<router-link class="mui-tab-item" :to="{name:'home'}">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
@@ -19,3 +19,9 @@
             
 		</nav>
 </template>
+<style scoped>
+	.mui-bar-tab{
+		position: fixed;
+		bottom: 0;
+	}
+</style>

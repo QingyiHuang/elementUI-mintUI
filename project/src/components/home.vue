@@ -13,22 +13,25 @@
         <!--9宫格子-->
 		<div class="mui-content">
 		        <ul class="mui-table-view mui-grid-view mui-grid-9">
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                        <!--新闻-->
+		            <!--新闻-->
+                    <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                         <router-link :to="{name:'news.list'}">
 		                    <span class="mui-icon icon-guanli"></span>
 		                    <div class="mui-media-body">Mongo多表</div>
                         </router-link>
                     </li>
+                    <!--comments-->
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 		                    <span class="mui-icon mui-icon-compose"><span class="mui-badge">5</span></span>
 		                    <div class="mui-media-body">评论</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            <!--图片-->
+                    <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                         <router-link :to="{name:'images.list'}">
 		                    <span class="mui-icon mui-icon-image"></span>
-		                    <div class="mui-media-body">图片懒加载</div>
+		                    <div class="mui-media-body">精彩图文</div>
                         </router-link>
                     </li>
+                    <!--购物车-->
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 		                    <span class="mui-icon mui-icon icon-gaiicon-"></span>
 		                    <div class="mui-media-body">vuex购物车</div></a></li>
