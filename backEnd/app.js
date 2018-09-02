@@ -4,6 +4,7 @@ var artTemplate = require('express-art-template')
 var session = require('express-session')
 var path = require('path')
 var mongoose = require('mongoose')
+
 mongoose.connect('mongodb://localhost/hqy2',{ useNewUrlParser: true })
 
 var router = require('./router')

@@ -1,6 +1,8 @@
 var expess = require('express')
+var app = expess()
 var md5 = require('blueimp-md5')
 var router = expess.Router()
+var path = require('path')
 var mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 
@@ -11,21 +13,49 @@ var NewsDetail = require('./models/new').NewsDetail
 var Category = require('./models/category').category
 var Imagelist = require('./models/imagelist').imagelist
 
+//引入功能
+var upload = require('./controller/fileUpload/multerUtil')
+
 /* 后台首页 */
 router.get('/',function(req,res){
     res.render('index.html',{
         backTitle:'后台',
         backEnds:[
-            {title:"Vue2 buyandNews app server backEnd-----img_category",detail:"/imgcategory"},
-            {title:"Vue2 buyandNews app server backEnd-----img_list",detail:"/imglist"},
-            {title:"Vue2 buyandNews app server backEnd-----news",detail:"/newslist"},
-            {title:"Vue2 buyandNews app server backEnd-----news_detail",detail:"/newsdetail"},
-            {title:"Vue2 buyandNews app server backEnd-----buy",detail:"buylist_api"},
-            {title:"Vue2 buyandNews app server backEnd-----lunbo",detail:"/lunbo"}
+            {title:"功能区-------------------------------图片上传",detail:"----/upload"},
+            {title:"api区域------------------------------图片分类",detail:"----/imgcategory"},
+            {title:"api区域------------------------------图片详情",detail:"----/imglist"},
+            {title:"api区域------------------------------新闻列表",detail:"----/newslist"},
+            {title:"api区域------------------------------新闻详情",detail:"----/newsdetail"},
+            {title:"api区域------------------------------购物车",detail:"----buylist_api"},
+            {title:"api区域------------------------------轮播",detail:"----/lunbo"},
+            {title:"api区域------------------------------缩略图",detail:"----/thumbnail"},
+            {title:"api区域------------------------------缩略图详情",detail:"----/thumbnaildetail"},
+            {title:"api区域------------------------------轮播",detail:"----/lunbo"},
+            {title:"api区域------------------------------轮播",detail:"----/lunbo"},
         ]
     })
 })
+/*--------------------------------功能后台区域-----------------------------------*/
 
+/*上传文件*/
+router.get('/upload',function(req,res){
+    res.render('upload.html')
+})
+router.post('/upload', upload.single('image'), function (req, res,cb) {
+    if (req.file) {
+
+            //filePath: 'uploads/' + path.basename(req.file.path)
+
+        return res.status(200).json({
+            err:null,
+            filePath:'email or password is invalid'
+        })
+        console.log(req.file);
+    }
+});
+
+
+/*页面api------------------------------------------------------------------------ */
 /* 后台轮播 */
 router.get('/lunbo',function(req,res){
     Lunbo.find({},function(err,data){
@@ -109,6 +139,11 @@ router.get('/imglist',function(req,res){
             res.end()
         })
     }
+})
+
+/*缩略图 缩略图详情 */
+router.get('/thumbnail',function(req,res){
+
 })
 
 

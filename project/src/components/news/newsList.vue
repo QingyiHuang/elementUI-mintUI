@@ -6,7 +6,7 @@
     <!-- MUI 图文列表 -->
         <ul class="mui-table-view">
             <li v-for="news in newsList" :key="news.id" class="mui-table-view-cell mui-media">
-                <router-link :to="{name:'news.detail',query:{id:news.news_detail[0]} }">
+                <router-link :to="{name:'news.detail',query:{id:news.news_detail} }">
                     <img class="mui-media-object mui-pull-left" :src="news.img_url">
                     <div class="mui-media-body">
                         <span v-text="news.title"></span>

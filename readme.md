@@ -10,3 +10,8 @@ vue-preview
 
 ## MongoDB,Nodejs,Vue全家桶,Mui,Mint-ui,.......update 9/2
 
+- 难点：界面bug
+- 多表关系，路由
+- 多个axios请求，边做后台数据，边处理前端数据，
+
+更新：后台文件上传

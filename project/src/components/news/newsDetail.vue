@@ -6,7 +6,7 @@
             <div>
                 <span>{{newsDetail.click[0].click}}次点击</span>
                 <span>分类:vue2.5.11</span>
-                <span>添加时间:{{newsDetail.add_time[0].add_time | convertDate}}</span>
+                <span>添加时间:{{newsDetail.add_time.add_time | convertDate}}</span>
             </div>
         </div>
         <div class="news-content" v-html="newsDetail.content"></div>

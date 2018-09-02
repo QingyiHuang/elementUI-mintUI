@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form class="form-horizontal" enctype='multipart/form-data' method='post' action=''>
+        <input type="file" name="image" id="choose"/>
+        <button onclick="handle">上传</button>
+        
+    </form>
+    <img class="newImg"/>
+    <!-- <form id='editfile' method='post' action='/upload' enctype='multipart/form-data'>
+        <input name="text" type="text"/>
+        选择图片：<input name="avatar" id='upfile' type='file'/>
+        <input type='submit' onclick="handle(e)" value='提交'/>
+    </form> -->
+    
+<script src="/public/jquery.js"></script>
+<script>
+        function handle(e) {
+           // var formData = $(this).serialize() 序列化
+        e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: '/upload',
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data)
+              //$(".newImg").attr("src", data.filePath);//上传成功则图片显示
+            },
+            error: function (err) {
+              console.log(err.message);
+            }
+          })
+        }
+</script>
+</body>
+</html>

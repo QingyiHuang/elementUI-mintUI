@@ -19,6 +19,7 @@ import Search from './components/search.vue'
 import NewsList from './components/news/newsList.vue'
 import NewsDetail from './components/news/newsDetail.vue'
 import ImageList from './components/imageslist/imagelist.vue'
+import imageDetail from './components/imageslist/imagedetail.vue'
 
 //全局组件需要的组件对象
 import NavBar from './components/common/navBar.vue'
@@ -36,6 +37,7 @@ Axios.defaults.baseURL='http://localhost:3000'
 //配置路由
 Vue.use(VueRouter)
 let router = new VueRouter({
+  mode:'history',
   routes:[
     {path:'/',redirect:{name:'home'}},//redirect
     {name:'home',path:'/home',component:Home},//home
@@ -45,6 +47,7 @@ let router = new VueRouter({
     {name:'news.list',path:'/news/list',component:NewsList},//新闻列表
     {name:'news.detail',path:'/news/detail',component:NewsDetail},//新闻详情页面
     {name:'images.list',path:'/images/list',component:ImageList},//图片页面
+    {name:'images.detail',path:'/images/detail/:id',component:imageDetail},//图片详情页面
   ],
   linkActiveClass:'mui-active'
 })

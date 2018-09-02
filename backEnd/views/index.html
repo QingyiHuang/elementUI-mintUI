@@ -6,11 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Cache-Control"content="max-age=0"/>
     <title>{{ backTitle }}</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        h4{
+            font-size: 16px;
+        }
+        p{
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     {{each backEnds}}
         <h4>{{ $value.title }}</h4>
         <p>{{ $value.detail }}</p>
     {{/each}}
+    
 </body>
 </html>

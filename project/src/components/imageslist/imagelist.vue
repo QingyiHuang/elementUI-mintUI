@@ -3,16 +3,16 @@
         <nav-bar title="图片页面"></nav-bar>
         <div class="photo-header">
             <ul>
-                <li v-for="category in categories" :key="category.id">
+                <li v-for="category in categories" :key="category._id">
                     <a href="javascript:;" @click="loadImg(category._id)">{{category.title}}</a>
                 </li>
             </ul>
         </div>
         <div class="photo-list">
              <ul>
-                <li v-for="img in imgs" :key="img.id">
-                    <router-link :to="{name:'photo.detail',params:{id:img.id} }">
-                         <img :src="img.image_url">
+                <li v-for="img in imgs" :key="img._id">
+                    <router-link :to="{name:'images.detail',params:{id:img._id} }">
+                         <img v-lazy="img.image_url">
                         <p>
                             <span v-text="img.title"></span>
                             <br>
@@ -43,12 +43,20 @@ export default {
                 }).catch((err)=>{
                     console.log(err)
                 })
+        this.$axios.get('/imglist?id='+0)
+        .then((res)=>{
+            this.imgs = res.data
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     },
     mounted(){
         //console.log(this.imgs)
     },
     methods:{
         loadImg:function(id){
+            this.imgs=''
             if(id ==0){
                 this.$axios.get('/imglist?id='+id)
                         .then((res)=>{
