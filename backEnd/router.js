@@ -52,7 +52,7 @@ router.post('/upload', upload.single('image'), function (req, res,cb) {
         })
         console.log(req.file);
     }
-});
+})
 
 
 /*页面api------------------------------------------------------------------------ */
