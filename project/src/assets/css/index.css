@@ -1,0 +1,22 @@
+body{
+    background-color: #16181c;
+}
+.globalColor{
+    color:#b82525;
+}
+.mint-header{
+    background-color: #b82525;
+}
+.mui-bar{
+    background-color: #26282c;
+}
+
+.mui-bar-tab .mui-tab-item.mui-active{
+    color: #e21f1f
+}
+.mui-bar-tab .mui-tab-item{
+    color: #fff;
+}
+.tmpl{
+    margin-bottom: 50px;
+}

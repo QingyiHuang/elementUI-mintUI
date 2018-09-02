@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "for vue2 app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hqy",
+  "license": "MIT",
+  "dependencies": {
+    "art-template": "^4.13.0",
+    "bluebird": "^3.5.1",
+    "blueimp-md5": "^2.10.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "express-art-template": "^1.0.1",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.2.12"
+  }
+}
