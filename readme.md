@@ -14,7 +14,7 @@ mui
 - 多个axios请求，边做后台数据，边处理前端数据，
 - mongdb2种分页查询方法
 
-更新：---大猪蹄子mongodb分页查询
+更新：---大猪蹄-----vuex sessionStorage 保存用户登录状态 -----------功能完善中9/3
 
 问题;解决mui在webpack中打包问题：
 

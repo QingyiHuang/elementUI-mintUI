@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import Axios from 'axios'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
 
 //mint-ui+mui
 import Mint from 'mint-ui'
@@ -20,6 +21,13 @@ import NewsList from './components/news/newsList.vue'
 import NewsDetail from './components/news/newsDetail.vue'
 import ImageList from './components/imageslist/imagelist.vue'
 import imageDetail from './components/imageslist/imagedetail.vue'
+//注册登录部分
+import Login from './components/user/login.vue'
+import Register from './components/user/register.vue'
+
+//vuex 
+import store from './store/store'
+Vue.use(Vuex)
 
 //preview 2018 
 import VuePreview from 'vue-preview'
@@ -62,12 +70,15 @@ let router = new VueRouter({
     {name:'news.detail',path:'/news/detail',component:NewsDetail},//新闻详情页面
     {name:'images.list',path:'/images/list',component:ImageList},//图片页面
     {name:'images.detail',path:'/images/detail/:id',component:imageDetail},//图片详情页面
+    {name:'loginPage',path:'/login',component:Login},//登录
+    {name:'registerPage',path:'/register',component:Register},//注册
   ],
-  linkActiveClass:'mui-active'
+  linkActiveClass:'mui-active'//当router跳转的时候class 用mui 的active 
 })
 
 new Vue({
   el: '#app',
+  store,
   router,
   render: h => h(App)
 })

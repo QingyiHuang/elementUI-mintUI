@@ -1,5 +1,4 @@
 var expess = require('express')
-var app = expess()
 var md5 = require('blueimp-md5')
 var router = expess.Router()
 var path = require('path')
@@ -13,6 +12,7 @@ var NewsDetail = require('./models/new').NewsDetail
 var Category = require('./models/category').category
 var Imagelist = require('./models/imagelist').imagelist
 var Thumbnail = require('./models/thumbnail')
+var User = require('./models/user').User
 
 //引入功能
 var upload = require('./controller/fileUpload/multerUtil')
@@ -22,7 +22,9 @@ router.get('/',function(req,res){
     res.render('index.html',{
         backTitle:'后台',
         backEnds:[
-            {title:"功能区-------------------------------图片上传",detail:"----/upload"},
+            {title:"后台功能区-------------------------------图片上传",detail:"----/upload"},
+            {title:"api区域------------------------------登录",detail:"----/login"},
+            {title:"api区域------------------------------注册",detail:"----/register"},
             {title:"api区域------------------------------图片分类",detail:"----/imgcategory"},
             {title:"api区域------------------------------图片list",detail:"----/imglist"},
             {title:"api区域------------------------------图片详情",detail:"----/imagedetail"},
@@ -32,8 +34,7 @@ router.get('/',function(req,res){
             {title:"api区域------------------------------轮播",detail:"----/lunbo"},
             {title:"api区域------------------------------缩略图",detail:"----/thumbnail"},
             {title:"api区域------------------------------缩略图详情",detail:"----/thumbnaildetail---------停用"},
-            {title:"api区域------------------------------轮播",detail:"----/lunbo"},
-            {title:"api区域------------------------------轮播",detail:"----/lunbo"},
+
         ]
     })
 })
@@ -54,6 +55,18 @@ router.post('/upload', upload.single('image'), function (req, res,cb) {
         })
         console.log(req.file);
     }
+})
+
+/*注册 */
+router.post('/register',function(req,res){
+    console.log(req.body)
+})
+/*登录 */
+router.post('/login',function(req,res){
+    console.log(req.body)
+    red
+    res.send('1')
+    ife(2)
 })
 
 
@@ -86,7 +99,7 @@ router.get('/newslist',function(req,res){
     })
 })
 
-/*新闻详情页面 */
+/*新闻详情页面 ---------------------------------------------------------------click*/
 router.get('/newsdetail',function(req,res){
     var id = req.query.id
     NewsDetail.findById({_id:id}).populate({path:'click',select:'click'})
@@ -101,6 +114,28 @@ router.get('/newsdetail',function(req,res){
     .catch(function(err){
         res.status(500).json({err_code:500,message:'server error'})
     })
+    // .then(function(data){
+    //     var _id = data.click[0]._id
+    //     NewsList.findById({id:_id},function(err,newlist){
+    //         console.log(newlist)
+    //     })
+    //     res.setHeader('Content-type','application/json')
+    //     res.setHeader("Access-Control-Allow-Origin", "*")
+    //     res.send(JSON.stringify(data,undefined,2))
+    //     res.end()
+    // })
+
+    // .spread(function(newlist,data){
+    //     console.log(newlist.click)
+    //     // return Promise.all([newlist.save(),data])
+    // })
+    // .spread(function(newlist,data){
+    //     res.setHeader('Content-type','application/json')
+    //     res.setHeader("Access-Control-Allow-Origin", "*")
+    //     res.send(JSON.stringify(data,undefined,2))
+    //     res.end()
+    // })
+
 })
 
 /*图片分类 */
