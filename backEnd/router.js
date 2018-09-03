@@ -12,6 +12,7 @@ var NewsList = require('./models/new').Newslist
 var NewsDetail = require('./models/new').NewsDetail
 var Category = require('./models/category').category
 var Imagelist = require('./models/imagelist').imagelist
+var Thumbnail = require('./models/thumbnail')
 
 //引入功能
 var upload = require('./controller/fileUpload/multerUtil')
@@ -23,13 +24,14 @@ router.get('/',function(req,res){
         backEnds:[
             {title:"功能区-------------------------------图片上传",detail:"----/upload"},
             {title:"api区域------------------------------图片分类",detail:"----/imgcategory"},
-            {title:"api区域------------------------------图片详情",detail:"----/imglist"},
+            {title:"api区域------------------------------图片list",detail:"----/imglist"},
+            {title:"api区域------------------------------图片详情",detail:"----/imagedetail"},
             {title:"api区域------------------------------新闻列表",detail:"----/newslist"},
             {title:"api区域------------------------------新闻详情",detail:"----/newsdetail"},
             {title:"api区域------------------------------购物车",detail:"----buylist_api"},
             {title:"api区域------------------------------轮播",detail:"----/lunbo"},
             {title:"api区域------------------------------缩略图",detail:"----/thumbnail"},
-            {title:"api区域------------------------------缩略图详情",detail:"----/thumbnaildetail"},
+            {title:"api区域------------------------------缩略图详情",detail:"----/thumbnaildetail---------停用"},
             {title:"api区域------------------------------轮播",detail:"----/lunbo"},
             {title:"api区域------------------------------轮播",detail:"----/lunbo"},
         ]
@@ -141,10 +143,40 @@ router.get('/imglist',function(req,res){
     }
 })
 
+/*图片详情 */
+router.get('/imagedetail',function(req,res){
+    let id = req.query.id
+    Imagelist.findById({_id:id})
+        .then(function(data){
+            res.setHeader('Access-Control-Allow-Origin','*')
+            res.setHeader('Content-type','application/json')
+            res.send(JSON.stringify(data,undefined,2))
+            res.end()
+        })
+})
+
+/* thumbnail详情页面 ------逻辑出现问题-----------------------------------------------需要维护 用list内容替代*/
+// router.get('/imgdetail',function(req,res){
+//     console.log(req.query)
+//     let id = req.query.id
+//     Imagelist.findById({_id:id})
+//     .populate({path:'image_detail',select:''})
+// })
+
+
 /*缩略图 缩略图详情 */
 router.get('/thumbnail',function(req,res){
-
+    Thumbnail.find({})
+        .exec()
+        .then(function(data){
+            res.setHeader('Access-Control-Allow-Origin','*')
+            res.setHeader('Content-type','application/json')
+            res.send(JSON.stringify(data,undefined,2))
+            res.end()
+        })
 })
+
+
 
 
 

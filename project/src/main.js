@@ -21,6 +21,20 @@ import NewsDetail from './components/news/newsDetail.vue'
 import ImageList from './components/imageslist/imagelist.vue'
 import imageDetail from './components/imageslist/imagedetail.vue'
 
+//preview 2018 
+import VuePreview from 'vue-preview'
+Vue.use(VuePreview)
+// Vue.use(preview, {
+//   mainClass: 'pswp--minimal--dark',
+//   barsSize: {top: 0, bottom: 0},
+//   captionEl: false,
+//   fullscreenEl: false,
+//   shareEl: false,
+//   bgOpacity: 0.85,
+//   tapToClose: true,
+//   tapToToggleControls: false
+// })
+
 //全局组件需要的组件对象
 import NavBar from './components/common/navBar.vue'
 Vue.component('navBar',NavBar)
