@@ -44,7 +44,7 @@ var userSchema = new Schema({
         }
     },
     pow:{
-        type:number,
+        type:Number,
         default:'0',//普通人0  会员1 管理员2
         enum:[0,1,2]
     }

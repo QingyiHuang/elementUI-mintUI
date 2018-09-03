@@ -55,6 +55,16 @@
                     password:this.password,
                     phone:this.phone
                 })
+                .then(res=>{
+                    console.log(res.data)
+                    if(res.data.err_code == '0'){
+                        //vuex
+                        this.$store.dispatch('changeLogin',{err_code:res.data.err_code})
+                        this.$router.push({name:'primary',query:{id:req.data._id,flag:true}})
+                    }else{
+                        console.log(res.data.message)
+                    }
+                })
             }
         },
         created(){
@@ -64,7 +74,6 @@
 </script>
 <style scoped>
     .mui-input-group{
-        height: 220px;
         margin-top: 100px;
         color: aliceblue;
         font-size: 24px;

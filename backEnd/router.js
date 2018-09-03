@@ -59,14 +59,56 @@ router.post('/upload', upload.single('image'), function (req, res,cb) {
 
 /*注册 */
 router.post('/register',function(req,res){
-    console.log(req.body)
+    var reqBody = req.body
+    User.findOne({
+        $or : [{username:reqBody.username},{email:reqBody.email}]
+    })
+    .then(function(err,data){
+        if(err){
+            return res.status(500).json({err_code:500,message:'服务器错误'})
+        }else if(data){
+            return res.status(200).json({err_code:1,message:'邮箱或者用户名已经存在'})
+        }else{
+            reqBody.password=md5(reqBody.password)//加密
+            new User({reqBody}).save(function(err,user){
+                if(err){
+                    return res.status(500).json({err_code:500,message:'存储过程发生错误'})
+                }else{//为用户请求session对象添加挂载属性然后给用户拿去用
+                    req.session.user=user
+                    res.status(200).json({err_code:0,message:'注册成功',userinfo:user})
+                }
+            })
+        }
+    })
 })
 /*登录 */
 router.post('/login',function(req,res){
-    console.log(req.body)
-    red
-    res.send('1')
-    ife(2)
+    var reqBody = req.body
+    User.findOne({
+        username:reqBody.username,
+        password:md5(reqBody.password)
+    })
+    .then(function(err,data){
+        if(err){
+            return res.status(500).json({
+                err_code:500,
+                message:err.message
+            })
+        }else if(!data){
+            return res.status(200).json({
+                err_code:1,
+                message:'email or password is invalid'
+            })
+        }else{
+            req.session.user = data
+            res.status(200).json({
+                err_code:0,
+                message:'登陆成功',
+                userinfo:data
+            })
+        }
+    })
+
 })
 
 

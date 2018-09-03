@@ -13,18 +13,18 @@ const store = new Vuex.Store({
     },
     //改变数据的方法
     mutations:{
-        cUser(state,user){
-            state.username=user
+        cUser(state,obj){
+            state.username=obj.username
         },
         cLogin(state,msg){
-            state.isLogin=msg
-            localStorage.setItem('isLogin',msg)//后端约定
+            state.isLogin=msg.err_code
+            localStorage.setItem('isLogin',msg.err_code)//后端约定
         }
     },
     //actions 触发改变，dispatch去触发mutations
     actions:{
-        changeUser(store,user){
-            store.commit('cUser',user)
+        changeUser(store,obj){
+            store.commit('cUser',obj)
         },
         changeLogin(store,msg){
             store.commit('cLogin',msg)
