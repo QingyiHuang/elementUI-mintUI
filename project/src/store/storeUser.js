@@ -4,6 +4,11 @@ export default{
         username:'hqy',
         avatar:'',
         isLogin:'',//isLogin初始化为空，当登陆成功后自动更新状态
+        email:'',
+        phone:'',
+        birthday:'',
+        introduction:'',
+        pow:''
     },
     //改变数据的方法
     mutations:{
@@ -14,7 +19,28 @@ export default{
         cLogin(state,msg){
             state.isLogin=msg.err_code
             window.sessionStorage.setItem('isLogin',msg.err_code)
-        }
+        },
+        // cAvatar(state,obj){
+        //     state.username=obj.username
+        //     window.sessionStorage.setItem('username',obj.username)
+        // },
+        // cEmail(state,obj){
+        //     state.username=obj.username
+        //     window.sessionStorage.setItem('username',obj.username)
+        // },
+        // cPhone(state,obj){
+        //     state.username=obj.username
+        //     window.sessionStorage.setItem('username',obj.username)
+        // },
+        // cBirthday(state,obj){
+        //     state.username=obj.username
+        //     window.sessionStorage.setItem('username',obj.username)
+        // },
+        // cIntroduction(state,obj){
+        //     state.username=obj.username
+        //     window.sessionStorage.setItem('username',obj.username)
+        // },
+        // cPow(state)
     },
     //actions 触发改变，dispatch去触发mutations
     actions:{

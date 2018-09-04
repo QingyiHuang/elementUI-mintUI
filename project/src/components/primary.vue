@@ -14,7 +14,7 @@
         <div v-else>
             <div class="cicle1">
                     <a href="https://github.com/QingyiHuang" class="wrap">
-                        <div class="c_img" style="background-image:url(https://avatars3.githubusercontent.com/u/16174515?s=400&u=3b4d0748b9e585d4e0a196c31e6748e7a1be1899&v=4)"></div>
+                        <div class="c_img" :style="avatar"></div>
                             <div class="c_mask">
                                 <div class="info">
                                     <p>link to git</p>
@@ -23,12 +23,18 @@
                     </a>
             </div>
             <div class="fieldG">
-                <mt-field label="用户名"  disabled="true" v-model="username"></mt-field>
-                <mt-field label="邮箱"  disabled="true" type="email" v-model="email"></mt-field>
-                <mt-field label="手机号"  disabled="true" type="tel" v-model="phone"></mt-field>
-                <mt-field label="生日"  disabled="true" type="date" v-model="birthday"></mt-field>
-                <mt-field label="自我介绍"  disabled="true" type="textarea" rows="4" v-modal="introduction"></mt-field>
+                <mt-field label="用户名"  :disabled='flag' v-model="username"></mt-field>
+                <mt-field label="邮箱"  :disabled='flag' type="email" v-model="email"></mt-field>
+                <mt-field label="手机号"  :disabled='flag' type="tel" v-model="phone"></mt-field>
+                <mt-field label="生日"  :disabled='flag' type="date" v-model="birthday"></mt-field>
+                <mt-field label="自我介绍"  :disabled='flag' type="textarea" rows="4" v-modal="introduction"></mt-field>
+                <div class="btns">
+                    <mt-button size="large" type="primary">修改资料</mt-button>
+                    <mt-button size="large" @click="exist" type="danger">退出登录</mt-button>
+                </div>
             </div>
+            
+
         </div>
     </div>
 </template>
@@ -36,24 +42,79 @@
     export default{
         data(){
             return{
+                flag:true,//表单操纵flag
                 isLogin:true,
                 username:'',
                 email:'',
                 phone:'',
                 birthday:'',
-                introduction:''
+                introduction:'',
+                avatar:'',
+                pow:''
+            }
+        },
+        methods:{
+            exist(){
+                window.sessionStorage.setItem('isLogin','')
+                window.sessionStorage.setItem('user','')
+                this.isLogin=true
+                this.$store.dispatch('changeLogin',{err_code:''})
+                this.$router.replace({name:'primary'})
             }
         },
         created(){
-            this.isLogin=this.$route.query.flag
-            var _id = this.route.query.id
+            let _id= this.$route.params.id
+
             // this.$axios.post('')
-            this.username = this.$store.getters['getUser']
+            // this.username = this.$store.getters['getUser']
+            if(_id){
+                console.log(_id)
+                this.$axios.get('/userInfo?id='+_id)
+                .then((res) => {
+                    var userObj={
+                                'username':res.data.username,
+                                'avatar':'background-image:url('+res.data.avatar+')',
+                                'phone':res.data.phone,
+                                'birthday':res.data.birthday,
+                                'introduction':res.data.introduction,
+                                'email':res.data.email
+                                }
+                    userObj = JSON.stringify(userObj)
+                    console.log(userObj)
+                    window.sessionStorage.setItem('user',userObj)
+                    var obj =JSON.parse(window.sessionStorage.getItem('user'))
+                            this.username = obj.username,
+                            this.avatar= obj.avatar,
+                            this.phone = obj.phone,
+                            this.birthday = obj.birthday,
+                            this.introduction = obj.introduction,
+                            this.email = obj.email
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+            }
+            var loginStatu=this.$store.getters['getLoginStatus']
+            console.log(loginStatu)
+            if(parseInt(loginStatu)===0){//vuex中的登录状态决定了当前页面显示
+                this.isLogin=false
+                    var obj =JSON.parse(window.sessionStorage.getItem('user'))
+                            this.username = obj.username,
+                            this.avatar= obj.avatar,
+                            this.phone = obj.phone,
+                            this.birthday = obj.birthday,
+                            this.introduction = obj.introduction,
+                            this.email = obj.email
+            }else{
+                this.isLogin=true
+            }
+
         }
 
     }
 </script>
 <style scoped>
+
 .primary_box[data-v-028471bc]{
     background: #16181c;
 }

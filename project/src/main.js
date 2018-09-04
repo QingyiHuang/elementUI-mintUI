@@ -78,7 +78,7 @@ let router = new VueRouter({
     {name:'search',path:'/search',component:Search},//search
     {name:'primary',path:'/primary',component:Primary},//个人管理
     {name:'news.list',path:'/news/list',component:NewsList},//新闻列表
-    {name:'news.detail',path:'/news/detail',component:NewsDetail},//新闻详情页面
+    {name:'news.detail',path:'/news/detail/:id',component:NewsDetail},//新闻详情页面
     {name:'images.list',path:'/images/list',component:ImageList},//图片页面
     {name:'images.detail',path:'/images/detail/:id',component:imageDetail},//图片详情页面
     {name:'loginPage',path:'/login',component:Login},//登录
@@ -91,5 +91,14 @@ new Vue({
   el: '#app',
   store,
   router,
-  render: h => h(App)
+  render: h => h(App),
+  created(){
+    //判断是否有本地存储中是否有isLogin，并更新vuex仓库
+    if(window.sessionStorage.getItem('isLogin') == null){
+      window.sessionStorage.setItem('isLogin','')
+    }else{
+      this.$store.dispatch('changeLogin',{err_code:window.sessionStorage.getItem('isLogin')})
+    }
+    console.log(this.$store.getters['getLoginStatus'])
+  }
 })

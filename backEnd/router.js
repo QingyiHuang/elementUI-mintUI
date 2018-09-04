@@ -5,6 +5,8 @@ var path = require('path')
 var mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 
+//中间件--用户登录信息
+
 
 
 //引入model
@@ -21,12 +23,14 @@ var upload = require('./controller/fileUpload/multerUtil')
 
 /* 后台首页 */
 router.get('/',function(req,res){
+    res.setHeader('Content-type','text/html')
     res.render('index.html',{
         backTitle:'后台',
         backEnds:[
             {title:"后台功能区-------------------------------图片上传",detail:"----/upload"},
             {title:"api区域------------------------------登录",detail:"----/login"},
             {title:"api区域------------------------------注册",detail:"----/register"},
+            {title:"api区域------------------------------用户基本信息接口get/post",detail:"----/userinfo"},
             {title:"api区域------------------------------图片分类",detail:"----/imgcategory"},
             {title:"api区域------------------------------图片list",detail:"----/imglist"},
             {title:"api区域------------------------------图片详情",detail:"----/imagedetail"},
@@ -110,9 +114,20 @@ router.post('/login',function(req,res){
             })
         }
     })
-
 })
-
+/*获取用户必要信息*/
+router.get('/userinfo',function(req,res){
+    console.log(req.query.id)
+    User.findById({_id:req.query.id},{avatar:1,username:1,phone:1,introduction:1,birthday:1,pow:1,email:1},
+        function(err,data){
+        if(err){
+            console.log(err)
+            res.status(500).json({err_code:500,message:'访问数据库失败'})
+        }else{
+            res.send(JSON.stringify(data,undefined,2))
+        }
+    })
+})
 
 /*页面api------------------------------------------------------------------------ */
 /* 后台轮播 */
@@ -121,7 +136,6 @@ router.get('/lunbo',function(req,res){
         if(err){
             res.status(500).json({err_code:500,message:'server error'})
         }else if(data){
-            res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()
         }
@@ -134,7 +148,6 @@ router.get('/newslist',function(req,res){
         if(err){
             res.status(500).json({err_code:500,message:'server error'})
         }else if(data){
-            res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()
         }
@@ -148,7 +161,6 @@ router.get('/newsdetail',function(req,res){
     .populate({path:'add_time',select:'add_time'})
     .exec()
     .then(function(data){
-        res.setHeader('Content-type','application/json')
         res.send(JSON.stringify(data,undefined,2))
         res.end()
     })
@@ -160,7 +172,7 @@ router.get('/newsdetail',function(req,res){
     //     NewsList.findById({id:_id},function(err,newlist){
     //         console.log(newlist)
     //     })
-    //     res.setHeader('Content-type','application/json')
+    // 
     //     res.send(JSON.stringify(data,undefined,2))
     //     res.end()
     // })
@@ -170,7 +182,7 @@ router.get('/newsdetail',function(req,res){
     //     // return Promise.all([newlist.save(),data])
     // })
     // .spread(function(newlist,data){
-    //     res.setHeader('Content-type','application/json')
+    // 
     //     res.send(JSON.stringify(data,undefined,2))
     //     res.end()
     // })
@@ -181,7 +193,6 @@ router.get('/newsdetail',function(req,res){
 router.get('/imgcategory',function(req,res){
     Category.find({})
         .then(function(data){
-            res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()
         })
@@ -196,7 +207,6 @@ router.get('/imglist',function(req,res){
     if(id==0){
         Imagelist.find({})
         .then(function(data){
-            res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()
         }).catch((err)=>{
@@ -207,7 +217,6 @@ router.get('/imglist',function(req,res){
         .populate({path:'list',select:'title click add_time content image_url'})
         .exec()
         .then(function(data){
-            res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()
         })
@@ -219,7 +228,6 @@ router.get('/imagedetail',function(req,res){
     let id = req.query.id
     Imagelist.findById({_id:id})
         .then(function(data){
-            res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()
         })
@@ -239,7 +247,6 @@ router.get('/thumbnail',function(req,res){
     Thumbnail.find({})
         .exec()
         .then(function(data){
-            res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()
         })

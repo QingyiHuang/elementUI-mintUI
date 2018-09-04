@@ -5,7 +5,7 @@ var Schema = mongoose.Schema
 var userSchema = new Schema({
     avatar:{
         type:String,
-        default:'http://localhost:3000/public/img/avatar.png'
+        default:'http://localhost:3000/public/img/20180505143841_kzmNr.jpeg'
     },
     username:{
         type:String,

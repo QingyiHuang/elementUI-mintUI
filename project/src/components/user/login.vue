@@ -43,13 +43,16 @@
                     username:this.userName,
                     password:this.password,
                 })
-                // .then((result) => {
-                    
-                // }).catch((err) => {
-                    
-                // });
+                .then((result) => {
+                   if(result.data.err_code=='0'){
+                       this.$store.dispatch('changeLogin',{err_code:result.data.err_code})
+                       this.$store.dispatch('changeUser',{username:result.data.userinfo.username})
+                       this.$router.replace({name:'primary',params:{id:result.data.userinfo._id}})
+                   }
+                }).catch((err) => {
+                    console.log(err)
+                });
             },
-
         },
         created(){
 
