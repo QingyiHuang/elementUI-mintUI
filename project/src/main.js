@@ -4,6 +4,23 @@ import Axios from 'axios'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 
+//定义sessionStorage操作方式
+// Vue.prototype.setToken = function(tokenName,tokenValue){
+//   if(window.localStorage){
+//     localStorage.setItem(tokenName,tokenValue)
+//   }else{
+//     console.log('this browser does not support localStorage')
+//   }
+// }
+// Vue.prototype.getToken = function(tokenName){
+//   var token = localStorage.getItem(tokenName)
+//   if(token){
+//     return token
+//   }else{
+//     return '';
+//   }
+// }
+
 //mint-ui+mui
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
@@ -26,22 +43,16 @@ import Login from './components/user/login.vue'
 import Register from './components/user/register.vue'
 
 //vuex 
-import store from './store/store'
+import userStore from './store/storeUser'
 Vue.use(Vuex)
-
+let store = new Vuex.Store({
+  modules:{
+    userStore
+  }
+})
 //preview 2018 
 import VuePreview from 'vue-preview'
 Vue.use(VuePreview)
-// Vue.use(preview, {
-//   mainClass: 'pswp--minimal--dark',
-//   barsSize: {top: 0, bottom: 0},
-//   captionEl: false,
-//   fullscreenEl: false,
-//   shareEl: false,
-//   bgOpacity: 0.85,
-//   tapToClose: true,
-//   tapToToggleControls: false
-// })
 
 //全局组件需要的组件对象
 import NavBar from './components/common/navBar.vue'

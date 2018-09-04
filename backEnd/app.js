@@ -4,13 +4,21 @@ var artTemplate = require('express-art-template')
 var session = require('express-session')
 var path = require('path')
 var mongoose = require('mongoose')
-var corsHeader = require('./cors').allowCrossDomain
+// var corsHeader = require('./cors').allowCrossDomain
 mongoose.connect('mongodb://localhost/hqy2',{ useNewUrlParser: true })
 
 var router = require('./router')
 
 var app = express()
-
+//app使用白名单
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+};
+app.use(allowCrossDomain)
+// app.use(corsHeader)
 //body-parser
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
@@ -31,8 +39,7 @@ app.use(session({
     resave:false,
     saveUninitialized:true
 }))
-//app使用白名单
-app.use(corsHeader)
+
 //app使用路由
 app.use(router)
 

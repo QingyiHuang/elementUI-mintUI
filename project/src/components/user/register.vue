@@ -59,8 +59,9 @@
                     console.log(res.data)
                     if(res.data.err_code == '0'){
                         //vuex
+                        this.$store.dispatch('changeUser',{username:res.data.userinfo.username})
                         this.$store.dispatch('changeLogin',{err_code:res.data.err_code})
-                        this.$router.push({name:'primary',query:{id:req.data._id,flag:true}})
+                        this.$router.push({name:'primary',query:{id:res.data._id,flag:false}})
                     }else{
                         console.log(res.data.message)
                     }

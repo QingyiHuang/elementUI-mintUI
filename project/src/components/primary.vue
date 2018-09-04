@@ -36,9 +36,21 @@
     export default{
         data(){
             return{
-                isLogin:true
+                isLogin:true,
+                username:'',
+                email:'',
+                phone:'',
+                birthday:'',
+                introduction:''
             }
+        },
+        created(){
+            this.isLogin=this.$route.query.flag
+            var _id = this.route.query.id
+            // this.$axios.post('')
+            this.username = this.$store.getters['getUser']
         }
+
     }
 </script>
 <style scoped>

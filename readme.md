@@ -13,6 +13,9 @@ mui
 - 多表关系，路由
 - 多个axios请求，边做后台数据，边处理前端数据，
 - mongdb2种分页查询方法
+- token---当登录 token与服务端约定为0，服务端判定token是否为0，可以放开路由（中间件）
+- 用户退出关闭页面token复制为null，每次打开网页token设置‘’ 也可以用这个localStorage实现自动登录
+- vuex去存储sessionStorage的isLogin
 
 更新：---大猪蹄-----vuex sessionStorage 保存用户登录状态 -----------功能完善中9/3
 
