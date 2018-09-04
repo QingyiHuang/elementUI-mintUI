@@ -22,7 +22,7 @@ mui
 
 2：删除怪异引入样式
 
-![this is backEnd]()![this is backEnd]()![this is backEnd]()
+![this is backEnd](https://github.com/QingyiHuang/elementUI-mintUI/blob/master/test/gif2.gif)![this is backEnd](https://github.com/QingyiHuang/elementUI-mintUI/blob/master/test/gif1.gif)![this is backEnd](https://github.com/QingyiHuang/elementUI-mintUI/blob/master/test/X3_PZ2%40DAWAOEK7%5BC%7D2%605MF.png)
 
 
 
