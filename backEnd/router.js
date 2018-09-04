@@ -5,6 +5,8 @@ var path = require('path')
 var mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 
+
+
 //引入model
 var Lunbo = require('./models/lunbo')
 var NewsList = require('./models/new').Newslist
@@ -108,7 +110,6 @@ router.post('/login',function(req,res){
             })
         }
     })
-
 })
 
 
@@ -120,7 +121,6 @@ router.get('/lunbo',function(req,res){
             res.status(500).json({err_code:500,message:'server error'})
         }else if(data){
             res.setHeader('Content-type','application/json')
-            res.setHeader("Access-Control-Allow-Origin", "*")
             res.send(JSON.stringify(data,undefined,2))
             res.end()
         }
@@ -134,7 +134,6 @@ router.get('/newslist',function(req,res){
             res.status(500).json({err_code:500,message:'server error'})
         }else if(data){
             res.setHeader('Content-type','application/json')
-            res.setHeader("Access-Control-Allow-Origin", "*")
             res.send(JSON.stringify(data,undefined,2))
             res.end()
         }
@@ -149,7 +148,6 @@ router.get('/newsdetail',function(req,res){
     .exec()
     .then(function(data){
         res.setHeader('Content-type','application/json')
-        res.setHeader("Access-Control-Allow-Origin", "*")
         res.send(JSON.stringify(data,undefined,2))
         res.end()
     })
@@ -162,7 +160,6 @@ router.get('/newsdetail',function(req,res){
     //         console.log(newlist)
     //     })
     //     res.setHeader('Content-type','application/json')
-    //     res.setHeader("Access-Control-Allow-Origin", "*")
     //     res.send(JSON.stringify(data,undefined,2))
     //     res.end()
     // })
@@ -173,7 +170,6 @@ router.get('/newsdetail',function(req,res){
     // })
     // .spread(function(newlist,data){
     //     res.setHeader('Content-type','application/json')
-    //     res.setHeader("Access-Control-Allow-Origin", "*")
     //     res.send(JSON.stringify(data,undefined,2))
     //     res.end()
     // })
@@ -184,7 +180,6 @@ router.get('/newsdetail',function(req,res){
 router.get('/imgcategory',function(req,res){
     Category.find({})
         .then(function(data){
-            res.setHeader('Access-Control-Allow-Origin','*')
             res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()
@@ -200,7 +195,6 @@ router.get('/imglist',function(req,res){
     if(id==0){
         Imagelist.find({})
         .then(function(data){
-            res.setHeader('Access-Control-Allow-Origin','*')
             res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()
@@ -212,7 +206,6 @@ router.get('/imglist',function(req,res){
         .populate({path:'list',select:'title click add_time content image_url'})
         .exec()
         .then(function(data){
-            res.setHeader('Access-Control-Allow-Origin','*')
             res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()
@@ -225,7 +218,6 @@ router.get('/imagedetail',function(req,res){
     let id = req.query.id
     Imagelist.findById({_id:id})
         .then(function(data){
-            res.setHeader('Access-Control-Allow-Origin','*')
             res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()
@@ -246,7 +238,6 @@ router.get('/thumbnail',function(req,res){
     Thumbnail.find({})
         .exec()
         .then(function(data){
-            res.setHeader('Access-Control-Allow-Origin','*')
             res.setHeader('Content-type','application/json')
             res.send(JSON.stringify(data,undefined,2))
             res.end()

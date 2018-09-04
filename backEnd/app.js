@@ -4,7 +4,7 @@ var artTemplate = require('express-art-template')
 var session = require('express-session')
 var path = require('path')
 var mongoose = require('mongoose')
-
+var corsHeader = require('./cors').allowCrossDomain
 mongoose.connect('mongodb://localhost/hqy2',{ useNewUrlParser: true })
 
 var router = require('./router')
@@ -31,6 +31,8 @@ app.use(session({
     resave:false,
     saveUninitialized:true
 }))
+//app使用白名单
+app.use(corsHeader)
 //app使用路由
 app.use(router)
 
